@@ -1,4 +1,4 @@
-package testcases.com.nopcommerce;
+package testcases;
 
 import actions.commons.AbstractTest;
 import actions.commons.Function;
@@ -8,7 +8,7 @@ import actions.pageobjects.RegisterPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import testdata.com.nopcommerce.RegisterData;
+import testdata.RegisterData;
 
 public class Register extends AbstractTest {
 

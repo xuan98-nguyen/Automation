@@ -1,4 +1,4 @@
-package testcases.com.nopcommerce;
+package testcases;
 
 import actions.commons.AbstractTest;
 import actions.commons.PageGeneratorManager;
@@ -8,8 +8,8 @@ import actions.pageobjects.MyAccountPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import testdata.com.nopcommerce.LoginData;
-import testdata.com.nopcommerce.MyAccountData;
+import testdata.LoginData;
+import testdata.MyAccountData;
 
 public class MyAccount extends AbstractTest {
 

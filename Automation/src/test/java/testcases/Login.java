@@ -1,4 +1,4 @@
-package testcases.com.nopcommerce;
+package testcases;
 
 import actions.commons.AbstractTest;
 import actions.commons.Constants;
@@ -8,7 +8,7 @@ import actions.pageobjects.LoginPageObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import testdata.com.nopcommerce.LoginData;
+import testdata.LoginData;
 
 public class Login extends AbstractTest {
 

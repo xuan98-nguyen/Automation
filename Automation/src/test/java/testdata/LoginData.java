@@ -1,4 +1,4 @@
-package testdata.com.nopcommerce;
+package testdata;
 
 public class LoginData {
 
