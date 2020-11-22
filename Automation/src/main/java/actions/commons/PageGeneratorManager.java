@@ -1,26 +1,16 @@
 package actions.commons;
 
-import actions.pageobjects.HomePageObject;
-import actions.pageobjects.LoginPageObject;
-import actions.pageobjects.MyAccountPageObject;
-import actions.pageobjects.RegisterPageObject;
+import actions.page.HomePage;
+import actions.page.LoginPage;
 import org.openqa.selenium.WebDriver;
 
 public class PageGeneratorManager {
 
-    public static HomePageObject getHomePageObject(WebDriver driver) {
-        return new HomePageObject(driver);
+    public static HomePage getHomePageObject(WebDriver driver) {
+        return new HomePage(driver);
     }
 
-    public static RegisterPageObject getRegisterPageObject(WebDriver driver) {
-        return new RegisterPageObject(driver);
-    }
-
-    public static LoginPageObject getLoginPageObject(WebDriver driver) {
-        return new LoginPageObject(driver);
-    }
-
-    public static MyAccountPageObject getMyAccountPageObject(WebDriver driver) {
-        return new MyAccountPageObject(driver);
+    public static LoginPage getLoginPageObject(WebDriver driver) {
+        return new LoginPage(driver);
     }
 }

@@ -106,7 +106,6 @@ public class ReportListener extends AbstractTest implements ITestListener {
             case ITestResult.FAILURE:
                 logReport.log(Status.FAIL, MarkupHelper.createLabel("TEST CASE FAIL: ".concat(result.getName()), ExtentColor.RED));
                 logReport.log(Status.FAIL, MarkupHelper.createLabel("ERROR CONTENT: " + result.getThrowable(), ExtentColor.RED));
-                logReport.log(Status.FAIL, MarkupHelper.createLabel("SCREENSHOT: ", ExtentColor.RED));
                 try {
                     logReport.fail("", MediaEntityBuilder.createScreenCaptureFromPath(captureImage(driver)).build());
                 } catch (IOException e) {
@@ -130,5 +129,10 @@ public class ReportListener extends AbstractTest implements ITestListener {
     public String captureImage(WebDriver driver) {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         return scrFile.getAbsolutePath();
+    }
+
+    //Method for adding logs passed from test cases
+    public static void reportLog(String message) {
+        logReport.log(Status.INFO, message);
     }
 }

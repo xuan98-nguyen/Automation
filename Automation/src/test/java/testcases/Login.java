@@ -1,87 +1,95 @@
 package testcases;
 
 import actions.commons.AbstractTest;
-import actions.commons.Constants;
 import actions.commons.PageGeneratorManager;
-import actions.pageobjects.HomePageObject;
-import actions.pageobjects.LoginPageObject;
+import actions.commons.reportconfig.ReportListener;
+import actions.page.DashBoardPage;
+import actions.page.HomePage;
+import actions.page.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
-import testdata.LoginData;
+import testdata.TestData;
 
 public class Login extends AbstractTest {
 
     private WebDriver driver;
-    private HomePageObject homePageObject;
-    private LoginPageObject loginPageObject;
+    private HomePage homePageObject;
+    private LoginPage loginPageObject;
 
     @Parameters({"browser"})
     @BeforeClass
-    public void beforeClass(String browserName) {
+    public void goToHomePage(String browserName) {
         driver = getBrowser(browserName);
         homePageObject = PageGeneratorManager.getHomePageObject(driver);
     }
 
-    @BeforeMethod
-    public void goToLoginPage() {
+    @Test
+    public void testCase01LoginWithNotExistAccount() {
+        ReportListener.reportLog("Click to login link");
         loginPageObject = homePageObject.clickToLoginPage();
+
+        ReportListener.reportLog("Login with user: " + TestData.INVALID_USER);
+        loginPageObject.login(TestData.INVALID_USER, TestData.PASSWORD);
+
+        ReportListener.reportLog("Verify display error message: " + TestData.ERROR_MESSAGE);
+        loginPageObject.verifyLoginFailMessage(TestData.ERROR_MESSAGE);
     }
 
     @Test
-    public void testCase01LoginEmptyData() {
-        loginPageObject.clickToLoginButton();
+    public void testCase02LoginWithEmptyAllFields() {
+        ReportListener.reportLog("Login with empty all fields");
+        loginPageObject.refreshPage(driver);
+        loginPageObject.login(TestData.EMPTY, TestData.EMPTY);
 
-        Assert.assertEquals(loginPageObject.getErrorMessage("Email"), LoginData.REQUIRED_EMAIL_MESSAGE);
+        ReportListener.reportLog("Verify display empty user messages: " + TestData.EMPTY_USER_MESSAGE);
+        loginPageObject.verifyEmptyUserMessge(TestData.EMPTY_USER_MESSAGE);
+
+        ReportListener.reportLog("Verify display empty password messages: " + TestData.EMPTY_USER_MESSAGE);
+        loginPageObject.verifyEmptyPasswordMessge(TestData.EMPTY_PASSWORD_MESSAGE);
     }
 
     @Test
-    public void testCase02LoginInvalidEmail() {
-        loginPageObject.inputDataToElement("Email", LoginData.WRONG_EMAIL);
-        loginPageObject.inputDataToElement("Password", LoginData.PASSWORD);
-        loginPageObject.clickToLoginButton();
+    public void testCase03LoginWithEmptyUserField() {
+        ReportListener.reportLog("Login with empty user field");
+        loginPageObject.refreshPage(driver);
+        loginPageObject.login(TestData.EMPTY, TestData.PASSWORD);
 
-        Assert.assertEquals(loginPageObject.getErrorMessage("Email"), LoginData.WRONG_EMAIL_MESSAGE);
+        ReportListener.reportLog("Verify display empty user messages: " + TestData.EMPTY_USER_MESSAGE);
+        loginPageObject.verifyEmptyUserMessge(TestData.EMPTY_USER_MESSAGE);
     }
 
     @Test
-    public void testCase03LoginWithEmailNotRegist() {
-        loginPageObject.inputDataToElement("Email", LoginData.NOT_REGIST_EMAIL);
-        loginPageObject.inputDataToElement("Password", LoginData.PASSWORD);
-        loginPageObject.clickToLoginButton();
+    public void testCase04LoginWithEmptyPasswordField() {
+        ReportListener.reportLog("Login with empty password field");
+        loginPageObject.refreshPage(driver);
+        loginPageObject.login(TestData.USER, TestData.EMPTY);
 
-        Assert.assertEquals(loginPageObject.getErrorMessage(null), LoginData.NOT_REGIST_EMAIL_MESSAGE);
-    }
-
-    @Test
-    public void testCase04LoginWithEmptyPassword() {
-        loginPageObject.inputDataToElement("Email", Register.email);
-        loginPageObject.clickToLoginButton();
-
-        Assert.assertEquals(loginPageObject.getErrorMessage(null), LoginData.WRONG_PASSWORD_MESSAGE);
+        ReportListener.reportLog("Verify display empty password messages: " + TestData.EMPTY_USER_MESSAGE);
+        loginPageObject.verifyEmptyPasswordMessge(TestData.EMPTY_PASSWORD_MESSAGE);
     }
 
     @Test
     public void testCase05LoginWithWrongPassword() {
-        loginPageObject.inputDataToElement("Email", Register.email);
-        loginPageObject.inputDataToElement("Password", LoginData.WRONG_PASSWORD);
-        loginPageObject.clickToLoginButton();
+        ReportListener.reportLog("Login with user: " + TestData.USER);
+        loginPageObject.refreshPage(driver);
+        loginPageObject.login(TestData.USER, TestData.INVALID_PASSWORD);
 
-        Assert.assertEquals(loginPageObject.getErrorMessage(null), LoginData.WRONG_PASSWORD_MESSAGE);
+        ReportListener.reportLog("Verify display error message: " + TestData.ERROR_MESSAGE);
+        loginPageObject.verifyLoginFailMessage(TestData.ERROR_MESSAGE);
     }
 
     @Test
-    public void testCase06LoginSuccess() {
-        loginPageObject.inputDataToElement("Email", Register.email);
-        loginPageObject.inputDataToElement("Password", LoginData.PASSWORD);
-        homePageObject = loginPageObject.clickToLoginButton();
+    public void testCase06LoginWithValidAccount() {
+        ReportListener.reportLog("Login with user: " + TestData.USER);
+        loginPageObject.refreshPage(driver);
+        loginPageObject.login(TestData.USER, TestData.PASSWORD);
 
-        Assert.assertEquals(homePageObject.getCurrentUrl(driver), Constants.URL);
+        DashBoardPage dashBoardPage = new DashBoardPage(driver);
+        dashBoardPage.verifyTitle(TestData.DASHBOARD_TITLE);
     }
 
     @AfterClass
     public void afterClass() {
-
         //Quit browser
         driver.quit();
     }

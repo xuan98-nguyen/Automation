@@ -36,3 +36,7 @@ test {
         suites 'src/test/resources/RunTestCase.xml'
     }
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

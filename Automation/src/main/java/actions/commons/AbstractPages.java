@@ -310,4 +310,12 @@ public abstract class AbstractPages {
         waitToElementDisplayedByXpath(driver, locator, values);
         return findElementByXpath(driver, locator, values).getAttribute("value");
     }
+
+    public void delay(int second) {
+        try {
+            Thread.sleep(second * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
