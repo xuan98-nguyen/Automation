@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Solashi" parallel="false" thread-count="4">
+<suite name="Solashi Website" parallel="false" thread-count="4">
     <listeners>
         <listener class-name="actions.commons.reportconfig.ReportListener"/>
     </listeners>
     <test name="Automation test website http://dev.solashi.com/">
-        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="testcases.Login"/>
         </classes>
