@@ -9,6 +9,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class AbstractTest {
     private WebDriver driver;
 
@@ -16,9 +18,7 @@ public abstract class AbstractTest {
     public WebDriver getBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-
-        driver.get(Constants.URL);
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }
 
