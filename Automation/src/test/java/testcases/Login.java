@@ -84,6 +84,7 @@ public class Login extends AbstractTest {
         loginPageObject.refreshPage(driver);
         loginPageObject.login(TestData.USER, TestData.PASSWORD);
 
+        ReportListener.reportLog("Verify display Dashboard page");
         DashBoardPage dashBoardPage = new DashBoardPage(driver);
         dashBoardPage.verifyTitle(TestData.DASHBOARD_TITLE);
     }
