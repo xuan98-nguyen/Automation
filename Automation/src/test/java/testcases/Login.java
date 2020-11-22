@@ -8,11 +8,10 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class Login extends AbstractTest {
-
     private WebDriver driver;
 
     @BeforeClass
-    public void goToHomePage() {
+    public void openBrowser() {
         driver = getBrowser();
         driver.get("http://dev.solashi.com:2896/");
         driver.manage().window().maximize();
@@ -119,7 +118,7 @@ public class Login extends AbstractTest {
     }
 
     @AfterClass
-    public void afterClass() {
+    public void quitBrowser() {
         //Quit browser
         driver.quit();
     }
