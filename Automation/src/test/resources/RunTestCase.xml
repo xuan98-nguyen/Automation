@@ -6,6 +6,7 @@
     <test name="Automation test website http://dev.solashi.com/">
         <classes>
             <class name="testcases.Login"/>
+            <class name="testcases.User"/>
         </classes>
     </test>
 </suite>
