@@ -286,12 +286,13 @@ public class Business extends AbstractTest {
         ReportListener.reportLog("Kiểm tra tạo doanh nghiệp thành công");
         driver.navigate().refresh();
 
-        String name = "Doanh nghiệp" + randomNumber();
-        ReportListener.reportLog("Nhập Tên doanh nghiệp là: " + name);
-        driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::div/input")).sendKeys(name);
+        String ten = "Doanh nghiệp" + randomNumber();
+        ReportListener.reportLog("Nhập Tên doanh nghiệp là: " + ten);
+        driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::div/input")).sendKeys(ten);
 
-        ReportListener.reportLog("Nhập tên giao dịch là: test giao dịch");
-        driver.findElement(By.xpath("//label[text()='Tên giao dịch']/following-sibling::div/input")).sendKeys("test giao dịch");
+        String tengiaodich = "Giao dịch" + randomNumber();
+        ReportListener.reportLog("Nhập tên giao dịch là: " + tengiaodich);
+        driver.findElement(By.xpath("//label[text()='Tên giao dịch']/following-sibling::div/input")).sendKeys(tengiaodich);
 
         ReportListener.reportLog("Chọn Loại doanh nghiệp là: Ban quản trị");
         driver.findElement(By.xpath("//label[text()='Loại doanh nghiệp *']/following-sibling::div")).click();
