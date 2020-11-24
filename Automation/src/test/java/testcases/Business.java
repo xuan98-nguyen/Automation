@@ -104,6 +104,274 @@ public class Business extends AbstractTest {
                 "Trường Dư nợ quyết toán theo người lao động không được bỏ trống.");
     }
 
+    @Test
+    public void testCase02CreateBusinessWithEmptyName() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra bỏ trống tên doanh nghiệp");
+        driver.navigate().refresh();
+
+        ReportListener.reportLog("Nhập tên giao dịch là: test giao dịch");
+        driver.findElement(By.xpath("//label[text()='Tên giao dịch']/following-sibling::div/input")).sendKeys("test giao dịch");
+
+        ReportListener.reportLog("Chọn Loại doanh nghiệp là: Ban quản trị");
+        driver.findElement(By.xpath("//label[text()='Loại doanh nghiệp *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Doanh nghiệp tư nhân')]")).click();
+
+
+        String phone = "0" + randomNumber();
+        ReportListener.reportLog("Nhập số điện thoại là: " + phone);
+        driver.findElement(By.xpath("//label[text()='Số điện thoại']/following-sibling::div/input")).sendKeys(phone);
+
+        String email = "doanhnghiep" + randomNumber() + "@gmail.com";
+        ReportListener.reportLog("Nhập email là: " + email);
+        driver.findElement(By.xpath("//label[text()='Địa chỉ email']/following-sibling::div/input")).sendKeys(email);
+
+        ReportListener.reportLog("Chọn Tỉnh thành là: Hồ Chí Minh");
+        driver.findElement(By.xpath("//label[text()='Tỉnh thành']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Hồ Chí Minh')]")).click();
+
+        ReportListener.reportLog("Chọn Quận huyện là: Quận 1");
+        driver.findElement(By.xpath("//label[text()='Quận huyện']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Quận 1')]")).click();
+
+        ReportListener.reportLog("Chọn Phường xã là: Phường Bến Nghé");
+        driver.findElement(By.xpath("//label[text()='Phường xã']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Phường Bến Nghé')]")).click();
+
+        ReportListener.reportLog("Nhập Địa chỉ cụ thể là: 30 phạm văn đồng");
+        driver.findElement(By.xpath("//label[text()='Địa chỉ cụ thể']/following-sibling::div/input")).sendKeys("30 phạm văn đồng");
+
+        ReportListener.reportLog("Chọn Ngày đăng ký chứng chỉ là: 15/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày đăng ký chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='15']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        ReportListener.reportLog("Chọn Ngày cấp chứng chỉ là: 16/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày cấp chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='16']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        String sochungchi = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập số chứng chỉ là: " + sochungchi);
+        driver.findElement(By.xpath("//label[text()='Số chứng chỉ']/following-sibling::div/input")).sendKeys(sochungchi);
+
+        ReportListener.reportLog("Chọn Cán bộ phụ trách là: Vu Duy");
+        driver.findElement(By.xpath("//label[text()='Cán bộ phụ trách *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Vu Duy')]")).click();
+
+        String duno = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo thu nhập là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo thu nhập']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo người lao động là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo người lao động']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Bấm vào nút Thêm Mới");
+        driver.findElement(By.xpath("//span[text()=' thêm mới']")).click();
+        Thread.sleep(2000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message lỗi tại trường Tên doanh nghiệp");
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::p")).getText(),
+                "Trường tên doanh nghiệp không được bỏ trống.");
+    }
+
+    @Test
+    public void testCase03CreateBusinessWithNameMore255Char() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra nhập tên doanh nghiệp lớn hơn 255 kí tự");
+        driver.navigate().refresh();
+
+        ReportListener.reportLog("Nhập Tên doanh nghiệp là: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::div/input")).sendKeys("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+        ReportListener.reportLog("Nhập tên giao dịch là: test giao dịch");
+        driver.findElement(By.xpath("//label[text()='Tên giao dịch']/following-sibling::div/input")).sendKeys("test giao dịch");
+
+        ReportListener.reportLog("Chọn Loại doanh nghiệp là: Ban quản trị");
+        driver.findElement(By.xpath("//label[text()='Loại doanh nghiệp *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Doanh nghiệp tư nhân')]")).click();
+
+
+        String phone = "0" + randomNumber();
+        ReportListener.reportLog("Nhập số điện thoại là: " + phone);
+        driver.findElement(By.xpath("//label[text()='Số điện thoại']/following-sibling::div/input")).sendKeys(phone);
+
+        String email = "doanhnghiep" + randomNumber() + "@gmail.com";
+        ReportListener.reportLog("Nhập email là: " + email);
+        driver.findElement(By.xpath("//label[text()='Địa chỉ email']/following-sibling::div/input")).sendKeys(email);
+
+        ReportListener.reportLog("Chọn Tỉnh thành là: Hồ Chí Minh");
+        driver.findElement(By.xpath("//label[text()='Tỉnh thành']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Hồ Chí Minh')]")).click();
+
+        ReportListener.reportLog("Chọn Quận huyện là: Quận 1");
+        driver.findElement(By.xpath("//label[text()='Quận huyện']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Quận 1')]")).click();
+
+        ReportListener.reportLog("Chọn Phường xã là: Phường Bến Nghé");
+        driver.findElement(By.xpath("//label[text()='Phường xã']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Phường Bến Nghé')]")).click();
+
+        ReportListener.reportLog("Nhập Địa chỉ cụ thể là: 30 phạm văn đồng");
+        driver.findElement(By.xpath("//label[text()='Địa chỉ cụ thể']/following-sibling::div/input")).sendKeys("30 phạm văn đồng");
+
+        ReportListener.reportLog("Chọn Ngày đăng ký chứng chỉ là: 15/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày đăng ký chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='15']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        ReportListener.reportLog("Chọn Ngày cấp chứng chỉ là: 16/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày cấp chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='16']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        String sochungchi = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập số chứng chỉ là: " + sochungchi);
+        driver.findElement(By.xpath("//label[text()='Số chứng chỉ']/following-sibling::div/input")).sendKeys(sochungchi);
+
+        ReportListener.reportLog("Chọn Cán bộ phụ trách là: Vu Duy");
+        driver.findElement(By.xpath("//label[text()='Cán bộ phụ trách *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Vu Duy')]")).click();
+
+        String duno = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo thu nhập là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo thu nhập']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo người lao động là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo người lao động']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Bấm vào nút Thêm Mới");
+        driver.findElement(By.xpath("//span[text()=' thêm mới']")).click();
+        Thread.sleep(2000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message lỗi tại trường Tên doanh nghiệp");
+        Assert.assertEquals(driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::p")).getText(),
+                "Trường tên doanh nghiệp không được lớn hơn 255 ký tự.");
+    }
+
+    @Test
+    public void testCaseCreateBusinessSuccess() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra tạo doanh nghiệp thành công");
+        driver.navigate().refresh();
+
+        String name = "Doanh nghiệp" + randomNumber();
+        ReportListener.reportLog("Nhập Tên doanh nghiệp là: " + name);
+        driver.findElement(By.xpath("//label[text()='Tên doanh nghiệp']/following-sibling::div/input")).sendKeys(name);
+
+        ReportListener.reportLog("Nhập tên giao dịch là: test giao dịch");
+        driver.findElement(By.xpath("//label[text()='Tên giao dịch']/following-sibling::div/input")).sendKeys("test giao dịch");
+
+        ReportListener.reportLog("Chọn Loại doanh nghiệp là: Ban quản trị");
+        driver.findElement(By.xpath("//label[text()='Loại doanh nghiệp *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Doanh nghiệp tư nhân')]")).click();
+
+
+        String phone = "0" + randomNumber();
+        ReportListener.reportLog("Nhập số điện thoại là: " + phone);
+        driver.findElement(By.xpath("//label[text()='Số điện thoại']/following-sibling::div/input")).sendKeys(phone);
+
+        String email = "doanhnghiep" + randomNumber() + "@gmail.com";
+        ReportListener.reportLog("Nhập email là: " + email);
+        driver.findElement(By.xpath("//label[text()='Địa chỉ email']/following-sibling::div/input")).sendKeys(email);
+
+        ReportListener.reportLog("Chọn Tỉnh thành là: Hồ Chí Minh");
+        driver.findElement(By.xpath("//label[text()='Tỉnh thành']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Hồ Chí Minh')]")).click();
+
+        ReportListener.reportLog("Chọn Quận huyện là: Quận 1");
+        driver.findElement(By.xpath("//label[text()='Quận huyện']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Quận 1')]")).click();
+
+        ReportListener.reportLog("Chọn Phường xã là: Phường Bến Nghé");
+        driver.findElement(By.xpath("//label[text()='Phường xã']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Phường Bến Nghé')]")).click();
+
+        ReportListener.reportLog("Nhập Địa chỉ cụ thể là: 30 phạm văn đồng");
+        driver.findElement(By.xpath("//label[text()='Địa chỉ cụ thể']/following-sibling::div/input")).sendKeys("30 phạm văn đồng");
+
+        ReportListener.reportLog("Chọn Ngày đăng ký chứng chỉ là: 15/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày đăng ký chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='15']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        ReportListener.reportLog("Chọn Ngày cấp chứng chỉ là: 16/11/2020");
+        driver.findElement(By.xpath("//label[text()='Ngày cấp chứng chỉ *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='16']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+
+        String sochungchi = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập số chứng chỉ là: " + sochungchi);
+        driver.findElement(By.xpath("//label[text()='Số chứng chỉ']/following-sibling::div/input")).sendKeys(sochungchi);
+
+        ReportListener.reportLog("Chọn Cán bộ phụ trách là: Vu Duy");
+        driver.findElement(By.xpath("//label[text()='Cán bộ phụ trách *']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text() ,'Vu Duy')]")).click();
+
+        String duno = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo thu nhập là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo thu nhập']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Nhập Dư nợ quyết toán theo người lao động là: " + duno);
+        driver.findElement(By.xpath("//label[text()='Dư nợ quyết toán theo người lao động']/following-sibling::div/input")).sendKeys(duno);
+
+        ReportListener.reportLog("Bấm vào nút Thêm Mới");
+        driver.findElement(By.xpath("//span[text()=' thêm mới']")).click();
+        Thread.sleep(2000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message thông báo tạo thành công");
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@role='alert']")).getText(),
+                "Tạo thành công");
+    }
+
     /*
      * Random the number with 11 digits
      */
