@@ -37,7 +37,7 @@ public class Department extends AbstractTest {
         driver.findElement(By.xpath("//span[text()='Thêm mới']")).click();
     }
 
-//    @Test
+    @Test
     public void testCase01CreateDepartmentWithAllEmptyFields() throws InterruptedException {
         ReportListener.reportLog("Kiểm tra bỏ trống các trường");
         driver.findElement(By.xpath("//span[text()='Thêm ']")).click();
