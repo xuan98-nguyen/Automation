@@ -13,6 +13,7 @@
             <class name="testcases.SettlementEmployee"/>
             <class name="testcases.RequestDocument"/>
             <class name="testcases.LaborSupport"/>
+            <class name="testcases.SchoolFeeSupport"/>
         </classes>
     </test>
 </suite>
