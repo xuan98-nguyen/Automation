@@ -10,6 +10,7 @@
             <class name="testcases.Business"/>
             <class name="testcases.Department"/>
             <class name="testcases.SettlementIncome"/>
+            <class name="testcases.SettlementEmployee"/>
         </classes>
     </test>
 </suite>
