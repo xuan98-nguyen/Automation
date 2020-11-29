@@ -11,6 +11,7 @@
             <class name="testcases.Department"/>
             <class name="testcases.SettlementIncome"/>
             <class name="testcases.SettlementEmployee"/>
+            <class name="testcases.RequestDocument"/>
         </classes>
     </test>
 </suite>
