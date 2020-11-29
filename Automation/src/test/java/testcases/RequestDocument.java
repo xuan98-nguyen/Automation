@@ -37,6 +37,7 @@ public class RequestDocument extends AbstractTest {
     @Test
     public void testCase01CreateRequestDocumentWithAllEmptyFields() throws InterruptedException {
         ReportListener.reportLog("Kiểm tra bỏ trống các trường");
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//td[@title='Thêm danh sách hỗ trợ']")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//td[7]/div/*[1]")).click();
