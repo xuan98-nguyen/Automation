@@ -106,13 +106,7 @@ public class SettlementIncome extends AbstractTest {
     }
 
     @AfterClass
-    public void quitBrowser() throws InterruptedException {
-        driver.findElement(By.xpath("//span[text()='Quyết toán chờ phê duyệt']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[@title='Xóa']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+    public void quitBrowser() {
         driver.quit();
     }
 }
