@@ -190,7 +190,7 @@ public class SettlementEmployee extends AbstractTest {
 
     @Test
     public void testCase04CreateSettlementEmployeeWithEmptyGCN() throws InterruptedException {
-        ReportListener.reportLog("Kiểm tra nhập nhập họ tên là space");
+        ReportListener.reportLog("Kiểm tra nhập số GCN đóng góp vào quỹ = các null");
         driver.navigate().refresh();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//td[@title='Thêm người lao động']/button")).click();
@@ -244,7 +244,7 @@ public class SettlementEmployee extends AbstractTest {
 
     @Test
     public void testCase05CreateSettlementEmployeeWithEmptyId() throws InterruptedException {
-        ReportListener.reportLog("Kiểm tra nhập nhập họ tên là space");
+        ReportListener.reportLog("Kiểm tra nhập số hộ chiếu = null");
         driver.navigate().refresh();
         Thread.sleep(2000);
         driver.findElement(By.xpath("//td[@title='Thêm người lao động']/button")).click();
@@ -297,7 +297,157 @@ public class SettlementEmployee extends AbstractTest {
     }
 
     @Test
-    public void testCase06CreateSettlementEmployeeSuccess() throws InterruptedException {
+    public void testCase06CreateSettlementEmployeeWithEmptyMarket() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra không chọn thị trường ");
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//td[@title='Thêm người lao động']/button")).click();
+
+        ReportListener.reportLog("Nhập Họ và tên là: Nguyễn Thị Xuân");
+        driver.findElement(By.xpath("(//input)[2]")).sendKeys("Nguyễn Thị Xuân");
+        Thread.sleep(1000);
+
+        String GCNNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số GCN đóng góp Quỹ: " + GCNNumber);
+        driver.findElement(By.xpath("(//input)[3]")).sendKeys(GCNNumber);
+        Thread.sleep(1000);
+
+        String idNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số hộ chiếu (hoặc CMND): " + idNumber);
+        driver.findElement(By.xpath("(//input)[4]")).sendKeys(idNumber);
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn ngày xuất cảnh dự kiến: 15/11/2020");
+        driver.findElement(By.xpath("(//input)[6]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='15']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Tiếp theo']")).click();
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn Kỳ quyết toán: Quý 1");
+        driver.findElement(By.xpath("//label[text()='Chọn quý']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text(), 'Quý 1')]")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Gửi quyết toán']")).click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.xpath("//button/span[text()='Quay lại']")).click();
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message lỗi tại trường Thị trường");
+        Assert.assertEquals(driver.findElement(By.xpath("(//p)[3]")).getText(),
+                "Trường thị trường không được bỏ trống.");
+    }
+
+    @Test
+    public void testCase07CreateSettlementEmployeeWithEmptyDate() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra không chọn ngày dự kiến xuất cảnh");
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//td[@title='Thêm người lao động']/button")).click();
+
+        ReportListener.reportLog("Nhập Họ và tên là: Nguyễn Thị Xuân");
+        driver.findElement(By.xpath("(//input)[2]")).sendKeys("Nguyễn Thị Xuân");
+        Thread.sleep(1000);
+
+        String GCNNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số GCN đóng góp Quỹ: " + GCNNumber);
+        driver.findElement(By.xpath("(//input)[3]")).sendKeys(GCNNumber);
+        Thread.sleep(1000);
+
+        String idNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số hộ chiếu (hoặc CMND): " + idNumber);
+        driver.findElement(By.xpath("(//input)[4]")).sendKeys(idNumber);
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn Thị trường là: Cộng hòa Xã hội Chủ nghĩa Việt Nam");
+        driver.findElement(By.xpath("(//input)[5]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text(), 'Cộng hòa Xã hội Chủ nghĩa Việt Nam')]")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Tiếp theo']")).click();
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn Kỳ quyết toán: Quý 1");
+        driver.findElement(By.xpath("//label[text()='Chọn quý']/following-sibling::div")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text(), 'Quý 1')]")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Gửi quyết toán']")).click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.xpath("//button/span[text()='Quay lại']")).click();
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message lỗi tại trường Ngày xuất cảnh dự kiến");
+        Assert.assertEquals(driver.findElement(By.xpath("(//p)[3]")).getText(),
+                "Trường ngày xuất cảnh dự kiến không được bỏ trống.");
+    }
+
+    @Test
+    public void testCase07CreateSettlementEmployeeWithEmptyQuarter() throws InterruptedException {
+        ReportListener.reportLog("Kiểm tra không chọn quý");
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//td[@title='Thêm người lao động']/button")).click();
+
+        ReportListener.reportLog("Nhập Họ và tên là: Nguyễn Thị Xuân");
+        driver.findElement(By.xpath("(//input)[2]")).sendKeys("Nguyễn Thị Xuân");
+        Thread.sleep(1000);
+
+        String GCNNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số GCN đóng góp Quỹ: " + GCNNumber);
+        driver.findElement(By.xpath("(//input)[3]")).sendKeys(GCNNumber);
+        Thread.sleep(1000);
+
+        String idNumber = String.valueOf(randomNumber());
+        ReportListener.reportLog("Nhập Số hộ chiếu (hoặc CMND): " + idNumber);
+        driver.findElement(By.xpath("(//input)[4]")).sendKeys(idNumber);
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn Thị trường là: Cộng hòa Xã hội Chủ nghĩa Việt Nam");
+        driver.findElement(By.xpath("(//input)[5]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[@role='presentation']//*[contains(text(), 'Cộng hòa Xã hội Chủ nghĩa Việt Nam')]")).click();
+        Thread.sleep(1000);
+
+        ReportListener.reportLog("Chọn ngày xuất cảnh dự kiến: 15/11/2020");
+        driver.findElement(By.xpath("(//input)[6]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//p[text()='15']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='Th11']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//div[text()='2020']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='OK']")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Tiếp theo']")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("//span[text()='Gửi quyết toán']")).click();
+        Thread.sleep(2000);
+
+        ReportListener.reportLog("Kiểm tra xuất hiện message lỗi tại trường Kỳ quyết toán");
+        Assert.assertEquals(driver.findElement(By.xpath("//td[text()='Kỳ quyết toán']/following-sibling::td//p")).getText(),
+                "Trường kỳ quyết toán không được bỏ trống.");
+    }
+
+    @Test
+    public void testCase08CreateSettlementEmployeeSuccess() throws InterruptedException {
         ReportListener.reportLog("Kiểm tra nhập nhập họ tên là space");
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -361,13 +511,7 @@ public class SettlementEmployee extends AbstractTest {
     }
 
     @AfterClass
-    public void quitBrowser() throws InterruptedException {
-        driver.findElement(By.xpath("//span[text()='Quyết toán chờ phê duyệt']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[@title='Xóa']")).click();
-        Thread.sleep(1000);
-        driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+    public void quitBrowser() {
         driver.quit();
     }
 }
