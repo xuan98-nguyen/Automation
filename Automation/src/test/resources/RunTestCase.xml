@@ -14,6 +14,7 @@
             <class name="testcases.RequestDocument"/>
             <class name="testcases.LaborSupport"/>
             <class name="testcases.SchoolFeeSupport"/>
+            <class name="testcases.Approve"/>
         </classes>
     </test>
 </suite>
