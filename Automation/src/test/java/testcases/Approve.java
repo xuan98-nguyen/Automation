@@ -54,7 +54,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click xác nhận");
         driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Kiểm tra xuất hiện message thông báo phê duyệt thành công");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@role='alert']")).getText(), "Phê duyệt thành công");
@@ -71,7 +71,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click Hỗ trợ tài liệu");
         driver.findElement(By.xpath("//span[text()='Hỗ trợ tài liệu']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Click yêu cầu chờ thẩm định");
         driver.findElement(By.xpath("//tbody/tr")).click();
@@ -83,7 +83,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click xác nhận");
         driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Kiểm tra xuất hiện message thông báo phê duyệt thành công");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@role='alert']")).getText(), "Cập nhật thành công");
@@ -100,7 +100,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click Hỗ trợ học phí");
         driver.findElement(By.xpath("//span[text()='Hỗ trợ học phí']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Click yêu cầu chờ thẩm định");
         driver.findElement(By.xpath("//tbody/tr")).click();
@@ -112,7 +112,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click xác nhận");
         driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Kiểm tra xuất hiện message thông báo phê duyệt thành công");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@role='alert']")).getText(), "Cập nhật thành công");
@@ -129,7 +129,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click Hỗ trợ rủi ro");
         driver.findElement(By.xpath("//span[text()='Hỗ trợ rủi ro']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Click yêu cầu chờ thẩm định");
         driver.findElement(By.xpath("//tbody/tr")).click();
@@ -141,7 +141,7 @@ public class Approve extends AbstractTest {
 
         ReportListener.reportLog("Click xác nhận");
         driver.findElement(By.xpath("//span[text()='Xác nhận']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         ReportListener.reportLog("Kiểm tra xuất hiện message thông báo phê duyệt thành công");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@role='alert']")).getText(), "Cập nhật thành công");
